@@ -1,0 +1,100 @@
+---
+title: "Causal Inference for Time-varying Treatments"
+format:
+  html:
+    theme: cosmo
+    embed-resources: true
+    number-sections: false
+    toc: true
+    toc-depth: 4
+    toc-location: left
+    code-fold: false
+knitr:
+  opts_chunk: 
+    cache: false    
+    echo: true
+    fig.align: 'center'
+    fig.width: 6
+    fig.height: 4
+    message: FALSE
+---
+
+## Time-varying Treatments
+
+### The causal effect of time-varying treatments
+
+Consider a time-fixed treatment variable $A$ (1: treated, 0: untreated) at time zero of follow-up and an outcome variable $Y$. The average causal effect of $A$ on the outcome $Y$ as the contrast between the mean counterfactual outcome $Y^{a=1}$ under treatment and the mean counterfactual outcome $Y^{a=0}$ under no treatment, that is,
+
+$$
+E[Y^{a=1}] - E[Y^{a=0}]
+$$
+
+Because treatment status is determined at a **single time** (time zero) for everybody, the average causal effect does not need to make reference to the time at which treatment occurs. In contrast, causal contrasts that involve time-varying treatments need to incorporate time explicitly.
+
+Consider a time-varying dichotomous treatment $A_k$ that may change at every month $k$ of follow-up, where $k = 0, 1, 2, \dots, K$. $A_k$ takes value 1 if the individual receives treatment in month $k$, and 0 otherwise. No individuals received treatment before the start of the study at time 0, i.e., $A_{−1} = 0$ for all individuals. The history of treatment from time 0 to time k is denoted by
+
+$$
+\bar{A}_k = (A_0, A_1, \dots, A_k)
+$$
+
+An individual who receives treatment continuously throughout the follow-up has treatment history $\bar{A} = (1, 1, \dots, 1) = \bar{1}$. Analogously, an individual who never receives treatment during the follow-up has treatment history $\bar{A} = (0, 0, \dots, 0) = \bar{0}$.
+
+Suppose $Y$ measures health status -- with higher values of $Y$ indicating better health -- at the end of follow-up at time $K + 1$. We would like to estimate the average causal effect of the time-varying treatment $\bar A$ on the outcome $Y$. Therefore, we will have to define the average causal effect as a contrast between the counterfactual mean outcomes under two treatment strategies that involve treatment at **all times** between the start ($k = 0$) and the end ($k = K$) of the follow-up.
+
+### Treatment strategies
+
+A treatment strategy -- also referred to as a plan, policy, protocol, or regime -- is a rule to assign treatment at each time k of follow-up.
+
+$$
+\begin{aligned}
+&\text{Strategy 1 - Always Treat:} & \quad \bar{a} = (1, 1, \dots, 1) = \bar{1} \\
+&\text{Strategy 2 - Never Treat:} & \quad \bar{a} = (0, 0, \dots, 0) = \bar{0}
+\end{aligned}
+$$
+
+We can define an average causal effect of $\bar A$ on the outcome $Y$ as the contrast between the mean counterfactual outcome $Y^{\bar a = \bar 1}$ under the strategy “always treat” and the mean counterfactual outcome $Y^{\bar a = \bar 0}$ under the strategy “never treat”, that is,
+
+$$
+E[Y^{\bar a = \bar 1}] - E[Y^{\bar a = \bar 0}]
+$$
+
+The number of possible contrasts is very large: we can define at least $2^K$ treatment strategies. In fact, these $2^K$ such strategies **do not exhaust all possible treatment strategies**.
+
+::: callout-note
+-   Deterministic dynamic treatment strategy
+
+    $$
+    g = [g_0(\bar a_{-1}, l_0), \dots, g_K(\bar a_{K-1}, \bar l_K)]
+    $$
+    
+    where $g_k(\bar a_{K-1}, \bar l_k)$ specifies the treatment assigned at $k$ to an individual with past history $(\bar a_{K-1}, \bar l_k)$.
+    
+-   Deterministic static treatment strategy
+
+    $$
+    g = [g_0(\bar a_{-1}), \dots, g_K(\bar a_{K-1})]
+    $$
+    
+    where $g_k(\bar a_{K-1})$ does not depend on $\bar l_k$
+    
+-   Random treatment strategies
+
+    Random treatment strategies that do not assign a particular value of treatment, but rather a probability of receiving a treatment value. Random treatment strategies can be static or dynamic.
+    
+We refer to the strategy $g$ for which the mean counterfactual outcome $E [Y^g]$ is maximized (when higher values of outcome are better) as the **optimal treatment strategy**. Optimal strategy will almost always be dynamic. However, random strategies (i.e., randomized trials) remain scientifically necessary because, before the trial, it is unknown which deterministic strategy is optimal.
+:::
+
+### Sequentially randomized experiments
+
+
+
+
+
+
+
+
+
+
+
+
+
