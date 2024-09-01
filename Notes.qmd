@@ -86,11 +86,49 @@ We refer to the strategy $g$ for which the mean counterfactual outcome $E [Y^g]$
 
 ### Sequentially randomized experiments
 
+-   Notations in causal diagrams
 
+    -   $A_k$: time-varying treatment
+    -   $L_k$: set of measured variables
+    -   $Y$: outcome
+    -   $U_k$: set of unmeasured variables that are common causes of at least two other variables on the causal graph
+    
 
+**Causal graph 1**
 
+::: {style="text-align: center;"}
+![](./fig/fig19_1.png){width=50%}
+:::
 
+The causal diagram in Figure 19.1 lacks arrows from either the measured covariates $\bar L_k$ or the unmeasured covariates $\bar U_k$ into treatment $A_k$. It could represent a randomized experiment in which treatment $A_k$ at each time $k$ is randomly assigned with a probability that depends **only on prior treatment history**.
 
+When interested in the contrast of static treatment strategies, Figure 19.1 is the proper generalization of no confounding by measured or unmeasured variables for time-varying treatments.
+
+**Causal graph 2**
+
+::: {style="text-align: center;"}
+
+![](./fig/fig19_2.png){width=50%}
+
+:::
+
+The causal diagram in Figure 19.2 includes arrows from measured covariates $\bar L_k$, but not from the unmeasured covariates $\bar U_k$, into treatment $A_k$. It could represent a randomized experiment in which treatment $A_k$ at each time $k$ is randomly assigned by the investigators with a probability that depends on **prior treatment and measured covariate history**.
+
+An experiment in which treatment is randomly assigned at each time $k$ to each individual is referred to as a sequentially randomized experiment. Therefore Figures 19.1 and 19.2 could represent sequentially randomized experiments.
+
+**Causal graph 3**
+
+::: {style="text-align: center;"}
+![](./fig/fig19_3.png){width=50%}
+:::
+
+The causal diagram in Figure 19.3 includes arrows from both measured covariates $\bar L_k$ and unmeasured covariates $\bar U_k$ into treatment $A_k$. In contrast to Figures 19.1 and 19.2, Figure 19.3 cannot represent a randomized experiment: the value of treatment $A_k$ at each time $k$ depends partly on unmeasured variables $U$ which are causes of $L_k$ and $Y$ , but unmeasured variables obviously cannot be used by investigators to assign treatment.
+
+In observational studies, decisions about treatment often depend on outcome predictors such as prognostic factors. Therefore, observational studies will be typically represented by either Figure 19.2 or Figure 19.3 rather than Figure 19.1. An observational study represented by Figure 19.2 would differ from a sequentially randomized experiment only in that **the assignment probabilities are unknown** (but could be estimated from the data).
+
+Unfortunately, it is impossible to show empirically whether an observational study is represented by the causal diagram in either Figure 19.2 or Figure 19.3.
+
+### Sequential exchangeability
 
 
 
