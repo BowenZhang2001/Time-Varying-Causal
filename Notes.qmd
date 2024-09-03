@@ -130,6 +130,68 @@ Unfortunately, it is impossible to show empirically whether an observational stu
 
 ### Sequential exchangeability
 
+::: callout-note
+-   Exchangeability
+
+Exchangeability means that the outcome under the potential treatment value a among the treated, $Pr(Y^a = 1 | A = 1)$, equals the outcome under the potential treatment value a among the untreated, $Pr(Y^a = 1 | A = 0)$, for both $a = 0$ and $a = 1$. In other words, counterfactual outcome and the actual treatment are independent, $Y^a \perp\!\!\!\perp A$ for all values $a$.
+:::
+
+Causal inference with time-varying treatments requires adjusting for the time-varying covariates $\bar L_k$ to achieve conditional exchangeability at each time point, i.e., sequential conditional exchangeability.
+
+$$
+Y^g \perp\!\!\!\perp A_k \ | \  \bar A_{k-1} = g(\bar A_{k-2}, \bar L_{k-1}), \bar L_k \qquad \text{for all strategies } g, \quad k = 0, 1, \dots, K
+$$
+
+A sequentially randomized experiment implies sequential exchangeability for $Y^g$
+
+
+In addition to some form of sequential exchangeability, causal inference involving time-varying treatments also requires a sequential version of the conditions of positivity and consistency.
+
+::: callout-note
+
+-   Positivity condition
+
+The positivity condition needs to be generalized from the fixed version "if $f_L(l) \neq 0, f_{A|L}(a|l) > 0$ for all $a$ and $l$" to the sequential version
+
+$$
+\text{If } f_{\bar A_{k-1}, \bar L_k}(\bar a_{k-1}, \bar l_k) \neq 0, \text{ then } f_{A_k | \bar A_{k-1}, \bar L_k}(a_k | \bar a_{k-1}, \bar l_k) > 0 \quad \text{for all } (\bar a_k, \bar l_k)
+$$
+
+-   Consistency condition
+
+The consistency condition needs to be generalized from the fixed version "if $A = a$, for a given individual, then $Y^a = Y$" for that individual" to the sequential version
+
+$$
+Y^{\bar a} = Y^{\bar a^*}  \ \text{ if } \ \bar a^* = \bar a; \quad Y^{\bar a} = Y \ \text{ if } \ \bar A = \bar a; \quad \bar L_k^{\bar a} = \bar L_k^{\bar a^*} \ \text{ if } \ \bar a^*_{k-1} = \bar a_{k-1}; \quad \bar L_k^{\bar a} = \bar L_k \ \text{ if } \ \bar A_{k-1} = \bar a_{k-1}
+$$
+:::
+
+### Confounding
+
+#### The structure of confounding
+
+In observational studies treatment may be determined by many factors. If those factors affect the risk of developing the outcome then the effects of those factors become entangled with the effect of treatment. We then say that there is confounding, which is just a form of **lack of exchangeability between the treated and the untreated**. Confounding is often viewed as the main shortcoming of observational studies.
+
+::: {style="text-align: center;"}
+![](./fig/fig7_1.png){width=50%}
+:::
+
+The diagram in Figure 7.1 depicts a treatment $A$, an outcome $Y$, and their shared (or common) cause $L$. In a causal diagram, a **backdoor path** is a noncausal path between treatment and outcome that remains even if all arrows pointing from treatment to other variables are removed. That is, the path has an arrow pointing into treatment.
+
+We refer to the bias caused by shared causes of treatment and outcome as confounding. Because of confounding, association is not causation.
+
+#### Confounding and exchangeability
+
+When exchangeability $Y^a \perp\!\!\!\perp A$ holds, the average causal effect can be identified without adjustment for any variables. For a binary treatment A, the average causal effect $E[Y^{a=1}] - E[Y^{a=0}]$ is calculated as the difference of conditional means $E[Y | A=1] - E[Y | A=0]$.
+
+When exchangeability $Y^a \perp\!\!\!\perp A$ does not hold but conditional exchangeability $Y^a \perp\!\!\!\perp A | L$ does, the average causal effect can also be identified with adjustment for the variables $L$.
+
+In practice, if we believe confounding is likely, a key question arises: can we determine whether there exists a set of measured covariates $L$ for which conditional exchangeability holds? Answering this question is possible **if one knows the causal DAG that generated the data**.
+
+
+
+
+
 
 
 
